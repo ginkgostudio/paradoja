@@ -1,0 +1,21 @@
+[28-May-2015 17:00:39 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/memokola/public_html/pruebaparadoja/wp-includes/class-wp-image-editor-gd.php on line 182
+[28-May-2015 17:01:37 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/memokola/public_html/pruebaparadoja/wp-includes/class-wp-image-editor-gd.php on line 182
+[28-May-2015 17:16:45 UTC] WordPress database error Specified key was too long; max key length is 1000 bytes for query 
+CREATE TABLE wp_woocommerce_tax_rate_locations (
+  location_id bigint(20) NOT NULL auto_increment,
+  location_code varchar(255) NOT NULL,
+  tax_rate_id bigint(20) NOT NULL,
+  location_type varchar(40) NOT NULL,
+  PRIMARY KEY  (location_id),
+  KEY tax_rate_id (tax_rate_id),
+  KEY location_type (location_type),
+  KEY location_type_code (location_type,location_code)
+) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-admin/admin.php'), do_action('appearance_page_install-required-plugins'), call_user_func_array, TGM_Plugin_Activation->install_plugins_page, TGMPA_List_Table->prepare_items, TGMPA_List_Table->process_bulk_actions, activate_plugins, activate_plugin, do_action('activate_woocommerce/woocommerce.php'), call_user_func_array, WC_Install::install, WC_Install::create_tables, dbDelta
+[07-Jun-2015 18:33:40 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[07-Jun-2015 18:35:44 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[07-Jun-2015 22:34:59 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[12-Jun-2015 13:37:25 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[12-Jun-2015 13:37:40 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[23-Jun-2015 19:59:48 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[24-Jun-2015 04:00:24 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
+[28-Jun-2015 16:45:48 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 1966080 bytes) in /home/memokola/public_html/pruebaparadoja/wp-includes/SimplePie/Item.php on line 2736
