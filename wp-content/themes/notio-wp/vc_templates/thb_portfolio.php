@@ -50,6 +50,19 @@
  	$rand = rand(0,1000);
  	ob_start();
  	?>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery("article.post.portfolio").mouseenter(function(){
+                //jQuery(".principal_imagen_post").css("display","block");
+                jQuery(this).find(".principal_imagen_post").css("display","none");
+                jQuery(this).find(".hover_imagen_post").css("display","block");
+            });
+            jQuery("article.post.portfolio").mouseleave(function(){
+                jQuery(this).find(".principal_imagen_post").css("display","block");
+                jQuery(this).find(".hover_imagen_post").css("display","none");
+            });
+        });
+    </script>
  	<?php if ($a['style'] == 'masonry') { ?>
  		<section class="thb-portfolio masonry row" data-loadmore="#loadmore-<?php echo $rand; ?>">
  			<?php if ($a['add_filters'] == 'true') { ?>
@@ -189,7 +202,8 @@
  		<?php if ($a['loadmore']) { ?>
  		<a class="masonry_btn" href="#" id="loadmore-<?php echo $rand; ?>" data-type="portfolio" data-loading="<?php _e( 'Loading Posts', THB_THEME_NAME ); ?>" data-nomore="<?php _e( 'No More Posts to Show', THB_THEME_NAME ); ?>" data-initial="<?php echo $a['item_count']; ?>" data-count="<?php echo $a['retrieve']; ?>" data-categories="<?php echo $a['categories']; ?>" data-masonry="<?php echo $a['masonry_style']; ?>"><?php _e( 'Load More', THB_THEME_NAME ); ?></a>
  		<?php } ?>
- 	<?php } else if ($a['style'] == 'text1') { ?>
+ 	<?php }
+    else if ($a['style'] == 'text1') { ?>
  		<?php $i = 1; ?>
  		<?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
 			<?php 
@@ -208,7 +222,8 @@
 					</figure>
 				</a>
 		<?php $i++; endwhile; // end of the loop. ?>
-	<?php } else if ($a['style'] == 'text2') { ?>
+	<?php }
+    else if ($a['style'] == 'text2') { ?>
 		<div class="text-style-container">
 		<?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
 			<?php
@@ -227,7 +242,8 @@
 				</a>
 		<?php endwhile; // end of the loop. ?>
 		</div>
- 	<?php } else if ($a['style'] == 'grid') { ?>
+ 	<?php }
+    else if ($a['style'] == 'grid') { ?>
  	
 		<?php if ( $posts->have_posts() ) { ?>
 			  <?php switch($a['columns']) {
@@ -265,20 +281,35 @@
 				<div class="row thb-portfolio shortcode">
 		  <?php } ?>
 				<?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
-					<?php 
-					$id = get_the_ID();
-					$image_id = get_post_thumbnail_id();
+					<?php
+
+
+                    $id = get_the_ID();
+
+                $image_id = get_post_thumbnail_id();
 					$image_link = wp_get_attachment_image_src($image_id,'full');
 					$image = aq_resize( $image_link[0], $w, $h, true, false);
 					$image_title = esc_attr( get_the_title($id) );
+                    if( class_exists('Dynamic_Featured_Image') ) {
+                        global $dynamic_featured_image;
+                        $featured_images = $dynamic_featured_image->get_featured_images( );
+                        $dfi_image_link = wp_get_attachment_image_src($featured_images[0]['attachment_id'],'full');
+                        $dfi_image = aq_resize( $featured_images[0]['full'], $w, $h, true, false);
+                        $dfi_image_title = esc_attr( get_the_title($featured_images[0]['attachment_id']) );
+
+                    }
 					$type = get_post_meta($id, 'portfolio_type', true);
 					$meta = get_the_term_list( $id, 'project-category', '<span>', '</span>, <span>', '</span>' ); 
 					$meta = preg_replace('/<a href=\"(.*?)\">(.*?)<\/a>/', "\\2", $meta);
 					?>
 					<article <?php post_class('post small-12 '.$col.' columns'); ?> id="post-<?php the_ID(); ?>">
 						<a href="<?php the_permalink() ?>" rel="bookmark" class="post-gallery overlay-effect">
-							<img src="<?php echo $image[0]; ?>" width="<?php echo $image[1]; ?>" height="<?php echo $image[2]; ?>" alt="<?php echo $image_title; ?>" />
-							<div class="overlay">
+                            <?php
+                            if (!empty($featured_images)){ ?>
+                                <img class="hover_imagen_post" style="display: none" src="<?php echo $dfi_image[0]; ?>" width="<?php echo $dfi_image[1]; ?>" height="<?php echo $dfi_image[2]; ?>" alt="<?php echo $dfi_image_title; ?>" />
+                            <?php } ?>
+                            <img class="principal_imagen_post" src="<?php echo $image[0]; ?>" width="<?php echo $image[1]; ?>" height="<?php echo $image[2]; ?>" alt="<?php echo $image_title; ?>" />
+                            <div class="overlay">
 								<div class="table">
 									<div>
 										<div class="child post-title">
@@ -303,7 +334,8 @@
 			<?php } ?>
 		   
 		<?php } ?>
-	 <?php } else if ($a['style'] == 'horizontal') { ?>
+	 <?php }
+    else if ($a['style'] == 'horizontal') { ?>
 	 	<?php if ( $posts->have_posts() ) { ?>
 	 		<div class="row thb-portfolio horizontal shortcode">
 	 			
@@ -341,7 +373,8 @@
 	 		</div>
 	 	   
 	 	<?php } ?>
-	 <?php } else if ($a['style'] == 'vertical') { ?>
+	 <?php }
+    else if ($a['style'] == 'vertical') { ?>
 	 	<?php if ( $posts->have_posts() ) { ?>
 	 		<?php switch($a['columns']) {
 	 			case 2:
